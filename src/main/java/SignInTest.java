@@ -7,24 +7,27 @@ import org.testng.annotations.Test;
 
 public class SignInTest {
 
-    WebDriver driver = new ChromeDriver();
+    WebDriver driver;
 
     @Test
     public void shouldThrowAnErrorIfSignInDetailsAreMissing() {
 
-        setDriverPath();
+    	 setDriverPath();
+         driver = new ChromeDriver();
+         driver.get("https://www.cleartrip.com/");
+         waitFor(2000);
+         driver.findElement(By.linkText("Your trips")).click();
+         driver.findElement(By.id("SignIn")).click();
+        
+         driver.switchTo().frame("modal_window");
+         waitFor(2000);
+         driver.findElement(By.id("signInButton")).click();
 
-        driver.get("https://www.cleartrip.com/");
-        waitFor(2000);
-
-        driver.findElement(By.linkText("Your trips")).click();
-        driver.findElement(By.id("SignIn")).click();
-
-        driver.findElement(By.id("signInButton")).click();
-
-        String errors1 = driver.findElement(By.id("errors1")).getText();
-        Assert.assertTrue(errors1.contains("There were errors in your submission"));
-        driver.quit();
+         String errors1 = driver.findElement(By.id("errors1")).getText();
+         System.out.println(errors1);
+         Assert.assertTrue(errors1.contains("There were errors in your submission"));
+         driver.switchTo().parentFrame();
+         driver.quit();
     }
 
     private void waitFor(int durationInMilliSeconds) {
