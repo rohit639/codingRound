@@ -30,14 +30,18 @@ public class HotelBookingPage extends BasePage {
 	@FindBy(xpath=Locators.HotelBokingPage.dateTill)
 	 private WebElement dateTill;
 	
+	private static final String locationToSearch = "Indiranagar, Bangalore";
+	private static final String travelrsOption = "1 room, 2 adults";
+	private static final String hotelTitle = "Online Hotel Booking |Hotels Near Me |Affordable Hotels @Cleartrip";
+	
 		public HotelBookingPage() {
 			PageFactory.initElements(BaseWebdriver.getDriver(), this);
-			Assert.assertEquals(BaseWebdriver.getDriver().getTitle(), "Online Hotel Booking |Hotels Near Me |Affordable Hotels @Cleartrip","Failed as title is not same as provided for "+this.getClass());
+			Assert.assertEquals(BaseWebdriver.getDriver().getTitle(), hotelTitle,"Failed as title is not same as provided for "+this.getClass());
 		}
 	
 		public SearchResultPage navigateToHotelSearchPage() {
 			
-			localityTextBox.sendKeys("Indiranagar, Bangalore");
+			localityTextBox.sendKeys(locationToSearch);
 		        try {
 					Thread.sleep(2000);
 				} catch (Exception e) {
@@ -55,7 +59,7 @@ public class HotelBookingPage extends BasePage {
 		       Assert.assertTrue((FunctionLib.isElemntVisble(dateTill)),"Failed as not able to view To Date for hotel booking");
 		       dateTill.click();
 		       
-		        Assert.assertTrue(FunctionLib.selectBasedOnVisibleText(travellerSelection, "1 room, 2 adults")); 
+		        Assert.assertTrue(FunctionLib.selectBasedOnVisibleText(travellerSelection, travelrsOption)); 
 		        searchButton.click();
 		        return new SearchResultPage();
 		}

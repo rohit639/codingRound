@@ -32,11 +32,14 @@ public class LandingPage extends BasePage {
 	 @FindBy(id= Locators.LandingPage.searchButton)
 	 private WebElement searchButton;
 	 
+	 private static final String landingTitle = "#1 Site for Booking Flights, Hotels, Packages, Trains & Local activities.";
+	 private static final String fromLocation= "Bangalore";
+	 private static final String toLocation = "Delhi";
 	 
 	 
 	public LandingPage() {
 		PageFactory.initElements(BaseWebdriver.getDriver(), this);
-		Assert.assertEquals(BaseWebdriver.getDriver().getTitle(), "#1 Site for Booking Flights, Hotels, Packages, Trains & Local activities.","Failed as title is not same as provided for "+this.getClass());
+		Assert.assertEquals(BaseWebdriver.getDriver().getTitle(), landingTitle,"Failed as title is not same as provided for "+this.getClass());
 	}
 
 	public SearchResultPage flightSearch() {
@@ -45,14 +48,14 @@ public class LandingPage extends BasePage {
         oneWay.click();
 
         fromPlace.clear();
-        fromPlace.sendKeys("Bangalore");
+        fromPlace.sendKeys(fromLocation);
       
         List<WebElement> originOptions = BaseWebdriver.getDriver().findElement(By.id("ui-id-1")).findElements(By.tagName("li"));
         Assert.assertTrue(FunctionLib.isAllElemntVisble(originOptions));
         originOptions.get(0).click();
 
         toPlace.clear();
-        toPlace.sendKeys("Delhi");
+        toPlace.sendKeys(toLocation);
 
         List<WebElement> destinationOptions = BaseWebdriver.getDriver().findElement(By.id("ui-id-2")).findElements(By.tagName("li"));
         Assert.assertTrue(FunctionLib.isAllElemntVisble(destinationOptions));

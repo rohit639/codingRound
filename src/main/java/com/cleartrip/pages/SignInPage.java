@@ -23,16 +23,19 @@ public class SignInPage extends BasePage{
 	@FindBy(id= Locators.SignInPage.errorMessage)
 	private WebElement errorMessage;
 	
+	private static final String signInTitle = "Sign in to Cleartrip";
+	private static final String errorMsg = "There were errors in your submission";
+	
 	public SignInPage() {
 		PageFactory.initElements(BaseWebdriver.getDriver(), this);
 		Assert.assertTrue(FunctionLib.switchToFrame(frame));
-		Assert.assertTrue(FunctionLib.isTextPresent(titleValidation, "Sign in to Cleartrip"), "Failed to validate SignIn Page");
+		Assert.assertTrue(FunctionLib.isTextPresent(titleValidation, signInTitle), "Failed to validate SignIn Page");
 	}
 	
 	public boolean verifySignIn() {
 		Assert.assertTrue(FunctionLib.isElemntVisble(signIn), "Failed as not able to view sign-In in sign-In pagr/form");
 		signIn.click();
-		return FunctionLib.isTextPresent(errorMessage, "There were errors in your submission");
+		return FunctionLib.isTextPresent(errorMessage, errorMsg);
 		
 	}
 	
