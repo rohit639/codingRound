@@ -13,7 +13,7 @@ public class Locators {
 		public static final String oneWay = "OneWay";
 		public static final String fromPlace = "FromTag";
 		public static final String toPlace = "ToTag";
-		public static final String dateSelection = "//*[@id='ui-datepicker-div']/div[1]/table/tbody/tr[4]/td[7]";
+		public static final String dateSelection = "//*[@id='ui-datepicker-div']/div[1]/table/tbody/tr[5]/td[6]";
 		public static final String searchButton = "SearchBtn";
 	}
 	
