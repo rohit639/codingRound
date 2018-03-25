@@ -7,10 +7,11 @@ import org.testng.Assert;
 
 import com.cleartrip.utils.BaseWebdriver;
 import com.cleartrip.utils.FunctionLib;
+import com.cleartrip.utils.Locators;
 
 public class SearchResultPage extends BasePage {
 	
-	@FindBy(xpath="//div[@id='ResultContainer_1_1']//a[@id='modifySearchLink']")
+	@FindBy(xpath=Locators.SearchResultPage.modifySearch)
 	private WebElement modifySearch; 
 	
 	public SearchResultPage() {

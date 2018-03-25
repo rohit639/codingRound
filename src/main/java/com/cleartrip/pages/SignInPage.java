@@ -7,31 +7,31 @@ import org.testng.Assert;
 
 import com.cleartrip.utils.BaseWebdriver;
 import com.cleartrip.utils.FunctionLib;
+import com.cleartrip.utils.Locators;
 
 public class SignInPage extends BasePage{
 
-	@FindBy(id="modal_window")
+	@FindBy(id= Locators.SignInPage.frame)
 	private WebElement frame;
 	
-	@FindBy(tagName="h1")
+	@FindBy(tagName= Locators.SignInPage.titleValidation)
 	private WebElement titleValidation;
 	
-	@FindBy(id="signInButton")
-	private WebElement SignIn;
+	@FindBy(id = Locators.SignInPage.sigInButton)
+	private WebElement signIn;
 	
-	@FindBy(id="errors1")
+	@FindBy(id= Locators.SignInPage.errorMessage)
 	private WebElement errorMessage;
 	
 	public SignInPage() {
 		PageFactory.initElements(BaseWebdriver.getDriver(), this);
 		Assert.assertTrue(FunctionLib.switchToFrame(frame));
-		System.out.println(titleValidation.getText());
 		Assert.assertTrue(FunctionLib.isTextPresent(titleValidation, "Sign in to Cleartrip"), "Failed to validate SignIn Page");
 	}
 	
 	public boolean verifySignIn() {
-		Assert.assertTrue(FunctionLib.isElemntVisble(SignIn), "Failed as not able to view sign-In in sign-In pagr/form");
-		SignIn.click();
+		Assert.assertTrue(FunctionLib.isElemntVisble(signIn), "Failed as not able to view sign-In in sign-In pagr/form");
+		signIn.click();
 		return FunctionLib.isTextPresent(errorMessage, "There were errors in your submission");
 		
 	}

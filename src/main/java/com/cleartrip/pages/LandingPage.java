@@ -10,25 +10,26 @@ import org.testng.Assert;
 
 import com.cleartrip.utils.BaseWebdriver;
 import com.cleartrip.utils.FunctionLib;
+import com.cleartrip.utils.Locators;
 
 public class LandingPage extends BasePage {
 	
-	 @FindBy(linkText = "Hotels")
+	 @FindBy(linkText = Locators.LandingPage.hotelLink)
 	    public WebElement hotelLink;
 	 
-	 @FindBy(id="OneWay")
+	 @FindBy(id= Locators.LandingPage.oneWay)
 	 private WebElement oneWay;
 	
-	 @FindBy(id="FromTag")
+	 @FindBy(id= Locators.LandingPage.fromPlace)
 	 private WebElement fromPlace;
 	 
-	 @FindBy(id="ToTag")
+	 @FindBy(id= Locators.LandingPage.toPlace)
 	 private WebElement toPlace;
 	 
-	 @FindBy(xpath="//*[@id='ui-datepicker-div']/div[1]/table/tbody/tr[4]/td[7]")
+	 @FindBy(xpath= Locators.LandingPage.dateSelection)
 	 private WebElement dateSelection;
 	 
-	 @FindBy(id="SearchBtn")
+	 @FindBy(id= Locators.LandingPage.searchButton)
 	 private WebElement searchButton;
 	 
 	 

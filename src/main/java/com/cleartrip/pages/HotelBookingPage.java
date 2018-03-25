@@ -8,25 +8,26 @@ import org.testng.Assert;
 
 import com.cleartrip.utils.BaseWebdriver;
 import com.cleartrip.utils.FunctionLib;
+import com.cleartrip.utils.Locators;
 
 public class HotelBookingPage extends BasePage {
 		
-	@FindBy(id = "Tags")
+	@FindBy(id = Locators.HotelBokingPage.localityTextBox)
     private WebElement localityTextBox;
 	
-	@FindBy(id = "SearchHotelsButton")
+	@FindBy(id = Locators.HotelBokingPage.searchButton)
     private WebElement searchButton;
 	
-	@FindBy(id = "travellersOnhome")
+	@FindBy(id = Locators.HotelBokingPage.travellerSelection)
     private WebElement travellerSelection;
 	
-	@FindBy(xpath="//div[@class='monthBlock first']//tr[5]//td[1]")
+	@FindBy(xpath=Locators.HotelBokingPage.dateFrom)
 	 private WebElement dateFrom;
 	
-	@FindBy(id = "CheckOutDate")
+	@FindBy(id = Locators.HotelBokingPage.checkOutDate)
     private WebElement checkOutDate;
 	
-	@FindBy(xpath="//*[@id='ui-datepicker-div']/div[2]/table/tbody/tr[4]/td[7]")
+	@FindBy(xpath=Locators.HotelBokingPage.dateTill)
 	 private WebElement dateTill;
 	
 		public HotelBookingPage() {
