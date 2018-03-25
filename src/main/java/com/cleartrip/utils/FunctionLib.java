@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class FunctionLib {
 	
@@ -26,12 +27,13 @@ public class FunctionLib {
 		}
 	}
 	
-	public static boolean isElemntVisbleAftrRefresh(WebElement webElement) {
+	public static boolean isTextPresent(WebElement webElement,String textToValidate) {
 		try {
-			wait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(webElement)));
+			Assert.assertTrue(isElemntVisble(webElement),"Failed as element is not visiable ");
+			wait.until(ExpectedConditions.textToBePresentInElement(webElement, textToValidate));
 			return true;
-		} catch (ElementNotVisibleException e) {
-			System.out.println("Could not find visablity of element " + webElement + " " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("Could not find Text "+textToValidate+" of element " + ". But found " +webElement.getText()+ " " + e.getMessage());
 			return false;
 		}
 	}
@@ -46,7 +48,7 @@ public class FunctionLib {
 		}
 	}
 	
-	public static boolean seletBasedOnVisibleText(WebElement webElement,String visibleText) {
+	public static boolean selectBasedOnVisibleText(WebElement webElement,String visibleText) {
 		try {
 			assertTrue(isElemntVisble(webElement),"Failed to view select option");
 			Select select = new Select(webElement);
