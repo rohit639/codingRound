@@ -10,13 +10,14 @@ import com.cleartrip.utils.FunctionLib;
 import com.cleartrip.utils.Locators;
 
 public class SearchResultPage extends BasePage {
-	
-	@FindBy(xpath=Locators.SearchResultPage.modifySearch)
-	private WebElement modifySearch; 
-	
+
+	@FindBy(xpath = Locators.SearchResultPage.modifySearch)
+	private WebElement modifySearch;
+
 	public SearchResultPage() {
 		PageFactory.initElements(BaseWebdriver.getDriver(), this);
-		Assert.assertTrue(FunctionLib.isElemntVisble(modifySearch),"Failed as could not validate search page "+this.getClass());
+		Assert.assertTrue(FunctionLib.isElemntVisble(modifySearch),
+				"Failed as could not validate search page " + this.getClass());
 	}
-	
+
 }

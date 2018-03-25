@@ -1,10 +1,11 @@
 package com.cleartrip.utils;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
 public class Configuration {
-	
+
 	private final static Properties prop = new Properties();
 	static {
 		try {
@@ -14,7 +15,7 @@ public class Configuration {
 			System.out.println(e.toString());
 		}
 	}
-	
+
 	private final static String url = getProperties("url");
 	private final static int implicit = Integer.parseInt(getProperties("implicit"));
 	private final static int pageLoad = Integer.parseInt(getProperties("pageLoad"));
@@ -44,6 +45,5 @@ public class Configuration {
 	public static int getExplicit() {
 		return explicit;
 	}
-
 
 }

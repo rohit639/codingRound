@@ -1,4 +1,5 @@
 package com.cleartrip.utils;
+
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -13,40 +14,38 @@ import com.sun.javafx.PlatformUtil;
 public class BaseWebdriver {
 
 	public static WebDriver driver;
-	
+
 	@BeforeSuite(alwaysRun = true)
 	public void initializeDriver() {
 		setDriverPath();
-        driver = new ChromeDriver();
+		driver = new ChromeDriver();
 	}
-	
-	@BeforeMethod(alwaysRun=true)
+
+	@BeforeMethod(alwaysRun = true)
 	public void print() {
 		driver.get(Configuration.getUrl());
-        settingBrowser();
+		settingBrowser();
 	}
-	
+
 	@AfterMethod(alwaysRun = true)
 	public static void closeBrowser() {
 		System.out.println("Closeing Browser...");
 		driver.close();
 	}
-	
-	
+
 	@AfterSuite(alwaysRun = true)
 	public static void closeWebDriver() {
-		if(driver!=null)
+		if (driver != null)
 			driver.quit();
 	}
-	
+
 	private static void settingBrowser() {
 		getDriver().manage().timeouts().implicitlyWait(Configuration.getImplicit(), TimeUnit.MINUTES);
 		getDriver().manage().timeouts().pageLoadTimeout(Configuration.getPageload(), TimeUnit.MINUTES);
 		getDriver().manage().timeouts().setScriptTimeout(Configuration.getScript(), TimeUnit.SECONDS);
 		getDriver().manage().window().maximize();
 	}
-	
-	
+
 	private void setDriverPath() {
 		if (PlatformUtil.isMac()) {
 			System.setProperty("webdriver.chrome.driver", "chromedriver");
@@ -62,9 +61,8 @@ public class BaseWebdriver {
 
 	}
 
-	
 	public static WebDriver getDriver() {
 		return driver;
 	}
-	
+
 }
