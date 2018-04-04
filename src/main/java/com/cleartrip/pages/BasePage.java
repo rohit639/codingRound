@@ -36,7 +36,7 @@ public class BasePage {
 	public WebElement getDateWebElement() {
 
 		WebElement dateToClick;
-		String today = FunctionLib.getToDayDate();
+		String today = FunctionLib.getToDayDate("d");
 		if (Integer.parseInt(today) <= 28) {
 			dateToClick = BaseWebdriver.getDriver()
 					.findElement(By.xpath("//div[@class='monthBlock first']//a[text()='" + today + "']"));
@@ -49,7 +49,7 @@ public class BasePage {
 	public WebElement getNextDateWebElement() {
 
 		WebElement dateToClick;
-		String today = FunctionLib.getToDayDate();
+		String today = FunctionLib.getToDayDate("d");
 		if (Integer.parseInt(today) <= 28) {
 			int plusDate = Integer.parseInt(today) + 1;
 			today = "" + plusDate;

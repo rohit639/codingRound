@@ -7,21 +7,26 @@ import java.util.Properties;
 public class Configuration {
 
 	private final static Properties prop = new Properties();
+	private static final String configFile = "config.properties";
 	static {
 		try {
-			prop.load(new FileInputStream("config.properties"));
+			prop.load(new FileInputStream(configFile));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println(e.toString());
 		}
 	}
 
 	private final static String url = getProperties("url");
+	private final static String browser = getProperties("browser");
 	private final static int implicit = Integer.parseInt(getProperties("implicit"));
 	private final static int pageLoad = Integer.parseInt(getProperties("pageLoad"));
 	private final static int explicit = Integer.parseInt(getProperties("explicit"));
 	private final static int script = Integer.parseInt(getProperties("script"));
 
+	public static String getbrowser() {
+		return browser;
+	}
+	
 	public static int getScript() {
 		return script;
 	}

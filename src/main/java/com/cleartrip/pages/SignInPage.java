@@ -28,7 +28,8 @@ public class SignInPage extends BasePage {
 
 	public SignInPage() {
 		PageFactory.initElements(BaseWebdriver.getDriver(), this);
-		Assert.assertTrue(FunctionLib.switchToFrame(frame));
+		//Assert.assertTrue(FunctionLib.switchToFrame(frame));
+		BaseWebdriver.getDriver().switchTo().frame(frame);
 		Assert.assertTrue(FunctionLib.isTextPresent(titleValidation, signInTitle), "Failed to validate SignIn Page");
 	}
 

@@ -1,35 +1,56 @@
 package com.cleartrip.utils;
 
+
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-
+import org.testng.annotations.Listeners;
 import com.sun.javafx.PlatformUtil;
 
+@Listeners(com.cleartrip.utils.ListnersClass.class)
 public class BaseWebdriver {
 
 	public static WebDriver driver;
-
+	private static final Logger logger =LoggerClass.createLogger();
 	@BeforeSuite(alwaysRun = true)
 	public void initializeDriver() {
 		setDriverPath();
-		driver = new ChromeDriver();
+
 	}
 
 	@BeforeMethod(alwaysRun = true)
 	public void print() {
+		if (Configuration.getbrowser().equalsIgnoreCase("chrome"))
+			driver = new ChromeDriver();
+		else if (Configuration.getbrowser().equalsIgnoreCase("firefox"))
+			driver = new FirefoxDriver();
+		driver = registerEvents(driver);
+		
 		driver.get(Configuration.getUrl());
 		settingBrowser();
 	}
 
+	private WebDriver  registerEvents(WebDriver driver1) {
+		EventFiringWebDriver edriver = new EventFiringWebDriver(driver1);
+		ListnersClass listner = new ListnersClass();
+		edriver.register(listner);
+		return edriver;
+	}
+
 	@AfterMethod(alwaysRun = true)
 	public static void closeBrowser() {
-		System.out.println("Closeing Browser...");
+		
 		driver.close();
 	}
 
@@ -47,18 +68,39 @@ public class BaseWebdriver {
 	}
 
 	private void setDriverPath() {
+		if (Configuration.getbrowser().equalsIgnoreCase("chrome")) {
+			System.setProperty("webdriver.chrome.driver", getPlatform() + "/chromedriver");
+		}
+
+		else if (Configuration.getbrowser().equalsIgnoreCase("firefox")) {
+			System.setProperty("webdriver.gecko.driver", getPlatform() + "/geckodriver");
+		}
+
+		else {
+			System.out.println("Please check browser name provided. it should be eitehr firefox or chrome");
+			System.exit(1);
+		}
+
+	}
+
+	private Path getPlatform() {
+		ClassLoader classLoader = BaseWebdriver.class.getClassLoader();
+		Path resourceDirectory;
 		if (PlatformUtil.isMac()) {
-			System.setProperty("webdriver.chrome.driver", "chromedriver");
+			resourceDirectory = Paths.get("src", "main", "resources", "mac");
+			return resourceDirectory.toAbsolutePath();
 		} else if (PlatformUtil.isWindows()) {
-			System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+			resourceDirectory = Paths.get("src", "main", "resources", "windows");
+			return resourceDirectory.toAbsolutePath();
 		} else if (PlatformUtil.isLinux()) {
-			System.setProperty("webdriver.chrome.driver", "chromedriver_linux");
+			resourceDirectory = Paths.get("src", "main", "resources", "linux");
+			return resourceDirectory.toAbsolutePath();
 		}
 
 		else
 			System.out.println("Platform should be one of these Mac/Windows/linux. Failed as test platform is :"
 					+ System.getProperty("os.name"));
-
+		return null;
 	}
 
 	public static WebDriver getDriver() {
