@@ -41,5 +41,10 @@
     <version>${log4j.version}</version>
     <scope>compile</scope>
 	</dependency>
+	<dependency>
+    <groupId>com.aventstack</groupId>
+    <artifactId>extentreports</artifactId>
+    <version>3.1.5</version>
+</dependency>
   </dependencies>
 </project>
